@@ -32,7 +32,7 @@ public:
 /* testing process */
 int main(){
 	TCC test;
-	auto ans = TCC.TCM(vi(),10);
+	auto ans = test.TCM(vi(),10);
 	
 	/* output results */
 	cout<<ans;
