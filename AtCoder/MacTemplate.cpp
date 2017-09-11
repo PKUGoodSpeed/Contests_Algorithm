@@ -1,3 +1,17 @@
+/*
+ ***
+ Question Name:
+ ***
+ Question Description:
+ ***
+ Input:
+ ***
+ Output:
+ 
+ ***
+ Idea: count subsets
+ */
+
 #include <memory.h>
 #include <algorithm>
 #include <iostream>
