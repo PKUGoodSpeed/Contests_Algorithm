@@ -43,23 +43,35 @@ typedef vector<bool> vb;
 typedef unordered_set<int> ui;
 typedef pair<LL,LL> pLL;
 
-LL T, N, K, V;
-vector<string> A;
-typedef pair<int, string> is;
+
+const LL MOD = 1000000007;
+LL T, N;
+
+
 
 void solve(LL t){
-    cin >> N >> K >> V;
-    cerr<<N<<' '<<K<<' '<<V<<endl;
-    A.resize(N);
-    for(LL i=0;i<N;++i) cin>>A[i];
-    cout << "Case #" << t << ":";
-    vector<is> ans;
-    for(LL j=0;j<K;++j){
-        ans.push_back(is((j + K*(V-1))%N, A[(j + K*(V-1))%N]));
+    vector<string> A(3);
+    cin >> N;
+    for(int i=0; i<3; ++i) cin >> A[i];
+    vector<vL> dp(N+1, vL(3, 0L));
+    dp[0][0] = 1L;
+    bool imp = false;
+    for(int i=1; i<=N && !imp; ++i){
+        imp = true;
+        if(A[0][i-1] == '.' && A[1][i-1] == '.') {
+            dp[i][0] = dp[i-1][1];
+            dp[i][1] += dp[i-1][0];
+            imp = false;
+        }
+        if(A[2][i-1] == '.' && A[1][i-1] == '.'){
+            dp[i][1] += dp[i-1][2];
+            dp[i][2] = dp[i-1][1];
+            imp = false;
+        }
+        for(int j=0; j<3; ++j) dp[i][j]%=MOD;
     }
-    sort(ans.begin(), ans.end());
-    for(is p: ans) cout<<" "<<p.second;
-    cout<<endl;
+    cout<<"Case #" << t << ": " << dp[N][2] << endl;
+    cerr<<"Case #" << t << ": " << dp[N][2] << endl;
 }
 
 
